@@ -1,7 +1,8 @@
 var ideaName = $('#title-input');
 var ideaDetails = $('#body-input');
 var saveButton = $('#save-button');
-var quality = [];
+var quality = ['Swill', 'Plausible', 'Genius'];
+var counter = 0;
 
 ideaName.on('keyup', saveButtonEnabled);
 ideaDetails.on('keyup', saveButtonEnabled);
@@ -10,15 +11,15 @@ saveButton.on('click', addIdea);
 function saveButtonEnabled() {
   if (saveButton.disabled = true) {
   saveButton.removeAttr('disabled', false);
-  }
-}
+  };
+};
 
 function IdeaObject(title, body, quality, id) {
   this.title = title;
   this.body = body;
   this.quality = quality;
   this.id;
-}
+};
 
 function addIdea() {
   event.preventDefault();
@@ -29,14 +30,14 @@ function addIdea() {
         <p class="idea-body">${ideaDetails.val()}</p>
         <button class="up-vote-button"></button>
         <button class="down-vote-button"></button>
-        <h3 class="quality">quality: swill</h3>
+        <h3>Quality:</h3> <h3 class="quality">Swill</h3>
       </article>`);
 
   cardObject.appendTo('.idea-section');
 
   console.log(ideaName.val());
 
-  var idea = new IdeaObject(ideaName.val(), ideaDetails.val(), quality, id)
+  var idea = new IdeaObject(ideaName.val(), ideaDetails.val(), quality, id);
   // ideaObject(ideaName.value, ideaDetails.value, , id);
   // var storedIdeas = new Object(ideaName.value, ideaDetails.value, id);
   // console.log('stuff');
@@ -61,13 +62,24 @@ function inputReset() {
 
 $('.idea-section').on('click', function (e) {
   if ($(e.target).hasClass('up-vote-button')) {
-    console.log('qualityUp clicked')
+    upQualityModifier();
+    counter++;
   } else if ($(e.target).hasClass('down-vote-button')) {
-    console.log('quality Down Clicked')
   } else if ($(e.target).hasClass('delete-idea-button')) {
-    console.log('delete-idea-button Clicked')
     $(e.target).parent().fadeOut(1000, function (){
     $(e.target).parent().remove();
   });
-  }
+  };
 });
+
+function upQualityModifier() {
+  
+  if (counter === 0) {
+    console.log(quality[0]);
+  } else if (counter === 1) {
+    console.log(quality[1]);
+  } else if (counter === 2) {
+    console.log(quality[2]);
+  };
+  
+};
